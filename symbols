@@ -1,13 +1,17 @@
 libeconf.so.0:LIBECONF_0.2
 libeconf.so.0:LIBECONF_0.3
+libeconf.so.0:LIBECONF_0.4
 libeconf.so.0:LIBECONF_ALPHA
+libeconf.so.0:econf_errLocation
 libeconf.so.0:econf_errString
 libeconf.so.0:econf_freeArray
+libeconf.so.0:econf_freeExtValue
 libeconf.so.0:econf_freeFile
 libeconf.so.0:econf_getBoolValue
 libeconf.so.0:econf_getBoolValueDef
 libeconf.so.0:econf_getDoubleValue
 libeconf.so.0:econf_getDoubleValueDef
+libeconf.so.0:econf_getExtValue
 libeconf.so.0:econf_getFloatValue
 libeconf.so.0:econf_getFloatValueDef
 libeconf.so.0:econf_getGroups
@@ -16,6 +20,7 @@ libeconf.so.0:econf_getInt64ValueDef
 libeconf.so.0:econf_getIntValue
 libeconf.so.0:econf_getIntValueDef
 libeconf.so.0:econf_getKeys
+libeconf.so.0:econf_getPath
 libeconf.so.0:econf_getStringValue
 libeconf.so.0:econf_getStringValueDef
 libeconf.so.0:econf_getUInt64Value
@@ -26,6 +31,7 @@ libeconf.so.0:econf_mergeFiles
 libeconf.so.0:econf_newIniFile
 libeconf.so.0:econf_newKeyFile
 libeconf.so.0:econf_readDirs
+libeconf.so.0:econf_readDirsHistory
 libeconf.so.0:econf_readFile
 libeconf.so.0:econf_setBoolValue
 libeconf.so.0:econf_setDoubleValue
