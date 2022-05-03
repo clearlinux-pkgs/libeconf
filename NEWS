@@ -1,3 +1,18 @@
+Version 0.4.6
+* econftool:
+  ** Parsing error: Reporting file and line nr.
+  ** --delimeters=spaces Taking all kind of spaces for delimiter 
+* libeconf:
+  Fixed bnc#1198165: Parsing files correctly which have space characters
+  AND none space characters as delimiters.
+
+Version 0.4.5
+* econftool:
+  ** New call "syntax" for checking the configuration files only.
+     Returns an error string with line number if an error occurs.
+  ** New options "--comment" and "--delimeters"
+  ** Parsing one file only if needed.
+
 Version 0.4.4
 * Fixed i586 build
 Version 0.4.3
