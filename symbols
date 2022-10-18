@@ -2,8 +2,11 @@ libeconf.so.0:LIBECONF_0.2
 libeconf.so.0:LIBECONF_0.3
 libeconf.so.0:LIBECONF_0.4
 libeconf.so.0:LIBECONF_ALPHA
+libeconf.so.0:econf_comment_tag
+libeconf.so.0:econf_delimiter_tag
 libeconf.so.0:econf_errLocation
 libeconf.so.0:econf_errString
+libeconf.so.0:econf_followSymlinks
 libeconf.so.0:econf_freeArray
 libeconf.so.0:econf_freeExtValue
 libeconf.so.0:econf_freeFile
@@ -33,6 +36,10 @@ libeconf.so.0:econf_newKeyFile
 libeconf.so.0:econf_readDirs
 libeconf.so.0:econf_readDirsHistory
 libeconf.so.0:econf_readFile
+libeconf.so.0:econf_requireGroup
+libeconf.so.0:econf_requireOwner
+libeconf.so.0:econf_requirePermissions
+libeconf.so.0:econf_reset_security_settings
 libeconf.so.0:econf_setBoolValue
 libeconf.so.0:econf_setDoubleValue
 libeconf.so.0:econf_setFloatValue
@@ -41,4 +48,6 @@ libeconf.so.0:econf_setIntValue
 libeconf.so.0:econf_setStringValue
 libeconf.so.0:econf_setUInt64Value
 libeconf.so.0:econf_setUIntValue
+libeconf.so.0:econf_set_comment_tag
+libeconf.so.0:econf_set_delimiter_tag
 libeconf.so.0:econf_writeFile
