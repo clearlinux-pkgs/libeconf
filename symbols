@@ -35,7 +35,10 @@ libeconf.so.0:econf_newIniFile
 libeconf.so.0:econf_newKeyFile
 libeconf.so.0:econf_readDirs
 libeconf.so.0:econf_readDirsHistory
+libeconf.so.0:econf_readDirsHistoryWithCallback
+libeconf.so.0:econf_readDirsWithCallback
 libeconf.so.0:econf_readFile
+libeconf.so.0:econf_readFileWithCallback
 libeconf.so.0:econf_requireGroup
 libeconf.so.0:econf_requireOwner
 libeconf.so.0:econf_requirePermissions
