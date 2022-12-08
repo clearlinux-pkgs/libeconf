@@ -1,6 +1,7 @@
 libeconf.so.0:LIBECONF_0.2
 libeconf.so.0:LIBECONF_0.3
 libeconf.so.0:LIBECONF_0.4
+libeconf.so.0:LIBECONF_0.5
 libeconf.so.0:LIBECONF_ALPHA
 libeconf.so.0:econf_comment_tag
 libeconf.so.0:econf_delimiter_tag
