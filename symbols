@@ -53,5 +53,6 @@ libeconf.so.0:econf_setStringValue
 libeconf.so.0:econf_setUInt64Value
 libeconf.so.0:econf_setUIntValue
 libeconf.so.0:econf_set_comment_tag
+libeconf.so.0:econf_set_conf_dirs
 libeconf.so.0:econf_set_delimiter_tag
 libeconf.so.0:econf_writeFile
