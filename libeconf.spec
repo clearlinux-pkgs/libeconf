@@ -5,7 +5,7 @@
 #
 Name     : libeconf
 Version  : 0.5.2
-Release  : 15
+Release  : 16
 URL      : https://github.com/openSUSE/libeconf/archive/v0.5.2/libeconf-0.5.2.tar.gz
 Source0  : https://github.com/openSUSE/libeconf/archive/v0.5.2/libeconf-0.5.2.tar.gz
 Summary  : @PROJECT_DESCRIPTION@
@@ -17,6 +17,11 @@ Requires: libeconf-license = %{version}-%{release}
 Requires: libeconf-man = %{version}-%{release}
 BuildRequires : buildreq-meson
 BuildRequires : doxygen
+BuildRequires : gcc-dev32
+BuildRequires : gcc-libgcc32
+BuildRequires : gcc-libstdc++32
+BuildRequires : glibc-dev32
+BuildRequires : glibc-libc32
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
@@ -49,6 +54,17 @@ Requires: libeconf = %{version}-%{release}
 dev components for the libeconf package.
 
 
+%package dev32
+Summary: dev32 components for the libeconf package.
+Group: Default
+Requires: libeconf-lib32 = %{version}-%{release}
+Requires: libeconf-bin = %{version}-%{release}
+Requires: libeconf-dev = %{version}-%{release}
+
+%description dev32
+dev32 components for the libeconf package.
+
+
 %package lib
 Summary: lib components for the libeconf package.
 Group: Libraries
@@ -56,6 +72,15 @@ Requires: libeconf-license = %{version}-%{release}
 
 %description lib
 lib components for the libeconf package.
+
+
+%package lib32
+Summary: lib32 components for the libeconf package.
+Group: Default
+Requires: libeconf-license = %{version}-%{release}
+
+%description lib32
+lib32 components for the libeconf package.
 
 
 %package license
@@ -77,23 +102,35 @@ man components for the libeconf package.
 %prep
 %setup -q -n libeconf-0.5.2
 cd %{_builddir}/libeconf-0.5.2
+pushd ..
+cp -a libeconf-0.5.2 build32
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1679683289
+export SOURCE_DATE_EPOCH=1688749952
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddir
 ninja -v -C builddir
+pushd ../build32/
+export PKG_CONFIG_PATH="/usr/lib32/pkgconfig:/usr/share/pkgconfig"
+export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
+export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
+export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
+export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
+meson --libdir=lib32 --prefix=/usr --buildtype=plain   builddir
+ninja -v -C builddir
+popd
 
 %check
 export LANG=C.UTF-8
@@ -101,10 +138,27 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 meson test -C builddir --print-errorlogs
+cd ../build32;
+meson test -C builddir --print-errorlogs || :
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/libeconf
 cp %{_builddir}/libeconf-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/libeconf/fcc7730890cf59ca8a39456c72a6d63c599094d9 || :
+pushd ../build32/
+DESTDIR=%{buildroot} ninja -C builddir install
+if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
+then
+pushd %{buildroot}/usr/lib32/pkgconfig
+for i in *.pc ; do ln -s $i 32$i ; done
+popd
+fi
+if [ -d %{buildroot}/usr/share/pkgconfig ]
+then
+pushd %{buildroot}/usr/share/pkgconfig
+for i in *.pc ; do ln -s $i 32$i ; done
+popd
+fi
+popd
 DESTDIR=%{buildroot} ninja -C builddir install
 
 %files
@@ -122,10 +176,21 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/lib64/pkgconfig/libeconf.pc
 /usr/share/man/man3/libeconf.3
 
+%files dev32
+%defattr(-,root,root,-)
+/usr/lib32/libeconf.so
+/usr/lib32/pkgconfig/32libeconf.pc
+/usr/lib32/pkgconfig/libeconf.pc
+
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libeconf.so.0
 /usr/lib64/libeconf.so.0.5.2
+
+%files lib32
+%defattr(-,root,root,-)
+/usr/lib32/libeconf.so.0
+/usr/lib32/libeconf.so.0.5.2
 
 %files license
 %defattr(0644,root,root,0755)
