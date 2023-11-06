@@ -2,6 +2,7 @@ libeconf.so.0:LIBECONF_0.2
 libeconf.so.0:LIBECONF_0.3
 libeconf.so.0:LIBECONF_0.4
 libeconf.so.0:LIBECONF_0.5
+libeconf.so.0:LIBECONF_0.6
 libeconf.so.0:LIBECONF_ALPHA
 libeconf.so.0:econf_comment_tag
 libeconf.so.0:econf_delimiter_tag
@@ -34,6 +35,8 @@ libeconf.so.0:econf_getUIntValueDef
 libeconf.so.0:econf_mergeFiles
 libeconf.so.0:econf_newIniFile
 libeconf.so.0:econf_newKeyFile
+libeconf.so.0:econf_readConfig
+libeconf.so.0:econf_readConfigWithCallback
 libeconf.so.0:econf_readDirs
 libeconf.so.0:econf_readDirsHistory
 libeconf.so.0:econf_readDirsHistoryWithCallback
