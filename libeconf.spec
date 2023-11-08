@@ -6,10 +6,10 @@
 # autospec commit: 250a666
 #
 Name     : libeconf
-Version  : 0.5.3
-Release  : 17
-URL      : https://github.com/openSUSE/libeconf/archive/v0.5.3/libeconf-0.5.3.tar.gz
-Source0  : https://github.com/openSUSE/libeconf/archive/v0.5.3/libeconf-0.5.3.tar.gz
+Version  : 0.6.0
+Release  : 18
+URL      : https://github.com/openSUSE/libeconf/archive/v0.6.0/libeconf-0.6.0.tar.gz
+Source0  : https://github.com/openSUSE/libeconf/archive/v0.6.0/libeconf-0.6.0.tar.gz
 Summary  : @PROJECT_DESCRIPTION@
 Group    : Development/Tools
 License  : MIT
@@ -102,13 +102,13 @@ man components for the libeconf package.
 
 
 %prep
-%setup -q -n libeconf-0.5.3
-cd %{_builddir}/libeconf-0.5.3
+%setup -q -n libeconf-0.6.0
+cd %{_builddir}/libeconf-0.6.0
 pushd ..
-cp -a libeconf-0.5.3 build32
+cp -a libeconf-0.6.0 build32
 popd
 pushd ..
-cp -a libeconf-0.5.3 buildavx2
+cp -a libeconf-0.6.0 buildavx2
 popd
 
 %build
@@ -116,7 +116,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1699282851
+export SOURCE_DATE_EPOCH=1699456832
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -214,14 +214,14 @@ DESTDIR=%{buildroot} ninja -C builddir install
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libeconf.so.0.5.3
+/V3/usr/lib64/libeconf.so.0.6.0
 /usr/lib64/libeconf.so.0
-/usr/lib64/libeconf.so.0.5.3
+/usr/lib64/libeconf.so.0.6.0
 
 %files lib32
 %defattr(-,root,root,-)
 /usr/lib32/libeconf.so.0
-/usr/lib32/libeconf.so.0.5.3
+/usr/lib32/libeconf.so.0.6.0
 
 %files license
 %defattr(0644,root,root,0755)
