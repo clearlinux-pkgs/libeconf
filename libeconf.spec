@@ -6,10 +6,10 @@
 # autospec commit: 9594167
 #
 Name     : libeconf
-Version  : 0.7.8
-Release  : 29
-URL      : https://github.com/openSUSE/libeconf/archive/v0.7.8/libeconf-0.7.8.tar.gz
-Source0  : https://github.com/openSUSE/libeconf/archive/v0.7.8/libeconf-0.7.8.tar.gz
+Version  : 0.7.9
+Release  : 30
+URL      : https://github.com/openSUSE/libeconf/archive/v0.7.9/libeconf-0.7.9.tar.gz
+Source0  : https://github.com/openSUSE/libeconf/archive/v0.7.9/libeconf-0.7.9.tar.gz
 Summary  : @PROJECT_DESCRIPTION@
 Group    : Development/Tools
 License  : MIT
@@ -101,32 +101,14 @@ Group: Default
 man components for the libeconf package.
 
 
-%package staticdev
-Summary: staticdev components for the libeconf package.
-Group: Default
-Requires: libeconf-dev = %{version}-%{release}
-
-%description staticdev
-staticdev components for the libeconf package.
-
-
-%package staticdev32
-Summary: staticdev32 components for the libeconf package.
-Group: Default
-Requires: libeconf-dev = %{version}-%{release}
-
-%description staticdev32
-staticdev32 components for the libeconf package.
-
-
 %prep
-%setup -q -n libeconf-0.7.8
-cd %{_builddir}/libeconf-0.7.8
+%setup -q -n libeconf-0.7.9
+cd %{_builddir}/libeconf-0.7.9
 pushd ..
-cp -a libeconf-0.7.8 build32
+cp -a libeconf-0.7.9 build32
 popd
 pushd ..
-cp -a libeconf-0.7.8 buildavx2
+cp -a libeconf-0.7.9 buildavx2
 popd
 
 %build
@@ -134,7 +116,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1745591498
+export SOURCE_DATE_EPOCH=1746730357
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -269,14 +251,14 @@ DESTDIR=%{buildroot} ninja -C builddir install
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libeconf.so.0.7.8
+/V3/usr/lib64/libeconf.so.0.7.9
 /usr/lib64/libeconf.so.0
-/usr/lib64/libeconf.so.0.7.8
+/usr/lib64/libeconf.so.0.7.9
 
 %files lib32
 %defattr(-,root,root,-)
 /usr/lib32/libeconf.so.0
-/usr/lib32/libeconf.so.0.7.8
+/usr/lib32/libeconf.so.0.7.9
 
 %files license
 %defattr(0644,root,root,0755)
@@ -285,11 +267,3 @@ DESTDIR=%{buildroot} ninja -C builddir install
 %files man
 %defattr(0644,root,root,0755)
 /usr/share/man/man8/econftool.8
-
-%files staticdev
-%defattr(-,root,root,-)
-/usr/lib64/libeconf.a
-
-%files staticdev32
-%defattr(-,root,root,-)
-/usr/lib32/libeconf.a
